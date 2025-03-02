@@ -1,0 +1,48 @@
+body {
+    background-color: rgb(239, 176, 232); /* Change this to any color you want */
+}
+
+.id{
+    color: blue;
+}
+
+#niru{
+    color: rgb(105, 57, 235);
+    font-size: 42px;
+    font-weight: bold;
+}
+
+#user_input{
+    font-size: 20px;
+    /* font-weight: bold; */
+    border-radius: 10px;
+    width: 100px;
+    height: 15px;
+}
+
+#send_button{
+    font-size: 22px;
+    font-weight: bold;
+    background-color: rgb(213, 118, 245);
+    border-radius: 10px;
+}
+
+body {
+    background-color: rgb(230, 173, 221); /* Change background color if needed */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}
+
+#a {
+    text-align: center;
+    background-color: rgb(201, 77, 162); /* Background color for the chatbox area */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    
+
+}
