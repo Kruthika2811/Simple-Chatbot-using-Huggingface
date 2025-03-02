@@ -1,0 +1,115 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+        #chatbox { width: 50%; margin: auto; padding: 10px; border: 1px solid #ccc; }
+        input, button { margin-top: 10px; padding: 8px; }
+    </style>
+</head>
+<body>
+    <h2>Chat with AI</h2>
+    <div id="chatbox"></div>
+    <input type="text" id="user_input" placeholder="Type your message...">
+    <button onclick="sendMessage()">Send</button>
+
+    <script>
+        // function sendMessage() {
+        //     let userMessage = document.getElementById("user_input").value;
+        //     document.getElementById("chatbox").innerHTML += `<p><b>You:</b> ${userMessage}</p>`;
+
+        //     fetch("/ask", {
+        //         method: "POST",
+        //         headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        //         body: `message=${userMessage}`
+        //     })
+        //     .then(response => response.json())
+        //     .then(data => {
+        //         document.getElementById("chatbox").innerHTML += `<p><b>Bot:</b> ${data.response}</p>`;
+        //     });
+
+        //     document.getElementById("user_input").value = "";
+        // }
+        document.getElementById("sendButton").addEventListener("click", function () {
+    let userMessage = document.getElementById("userInput").value;
+
+    fetch("/ask", {  
+        method: "POST",
+        headers: { "Content-Type": "application/json" },  
+        body: JSON.stringify({ message: userMessage })  
+    })
+    .then(response => response.json())  
+    .then(data => {
+        if (data.response) {  
+            document.getElementById("chatBox").innerHTML += `<p><b>Bot:</b> ${data.response}</p>`;
+        } else {
+            document.getElementById("chatBox").innerHTML += `<p><b>Bot:</b> Error: No response</p>`;
+            console.error("Error: Unexpected response format", data);
+        }
+    })
+    .catch(error => console.error("Error:", error));
+});
+
+    </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+        #chatbox { width: 50%; margin: auto; padding: 10px; border: 1px solid #ccc; }
+        input, button { margin-top: 10px; padding: 8px; }
+    </style>
+    <!-- <link rel="Stylesheet" href="index.css"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+
+</head>
+<body>
+    <div id="a">
+    <h2 id="niru">Welcome to Chatbot</h2>
+    <div id="chatbox"></div>
+    <input type="text" id="user_input" placeholder="Type Here">
+    <button id="send_button">Send</button>  <!-- ID Fixed -->
+
+    <script>
+        document.getElementById("send_button").addEventListener("click", function () {  // ID Fixed
+            let userMessage = document.getElementById("user_input").value;  // ID Fixed
+            let chatBox = document.getElementById("chatbox");  // ID Fixed
+
+            if (!userMessage.trim()) return; // Prevent empty messages
+
+            chatBox.innerHTML += `<p><b>You:</b> ${userMessage}</p>`;  // Display user message
+
+            fetch("/ask", {  
+                method: "POST",
+                headers: { "Content-Type": "application/json" },  
+                body: JSON.stringify({ message: userMessage })  
+            })
+            .then(response => response.json())  
+            .then(data => {
+                if (data.response) {  
+                    chatBox.innerHTML += `<p><b>Bot:</b> ${data.response}</p>`;  
+                } else {
+                    chatBox.innerHTML += `<p><b>Bot:</b> Error: No response</p>`;  
+                    console.error("Error: Unexpected response format", data);
+                }
+            })
+            .catch(error => {
+                chatBox.innerHTML += `<p><b>Bot:</b> Error: Unable to fetch response</p>`;  
+                console.error("Error:", error);
+            });
+
+            document.getElementById("user_input").value = "";  // Clear input box
+        });
+    </script>
+    </div>
+</body>
+</html>
